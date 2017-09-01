@@ -1,0 +1,97 @@
+
+# Linux From Scratch - Version 8.1rc2
+# Chapter 5. Constructing a Temporary System
+
+# 実行可能条件をチェックする
+lfs_selfcheck()
+{
+    [ `/usr/bin/whoami` == lfs ] || exit 2
+    [ "$LFS" != ""        ]      || exit 2
+    [ "$LFS_TGT" != ""    ]      || exit 2
+    [ "$SOURCEROOT" != "" ]      || exit 2
+    [ "$BUILDROOT" != ""  ]      || exit 2
+    [ "$BUILDDIR" != ""   ]      || exit 2
+    [ -d "$SOURCEDIR"     ]      || exit 2
+    [ -d "$BUILDTOP"      ]      || exit 2
+    [ -e "$ARCHIVE"       ]      || exit 2
+}
+
+# ソースアーカイブのパス名を得る
+tarballpath()
+{
+    for f in ${SOURCEDIR}/$1{,.tar}{,.Z,.gz,.bz2,.xz}
+    do
+        [ -e $f ] && echo $f
+    done
+}
+
+# 共通アクション定義
+lfs_clean()
+{
+    declare -f do_clean >/dev/null && do_clean
+}
+
+lfs_build()
+{
+    declare -f do_build >/dev/null && do_build
+}
+
+lfs_test()
+{
+    declare -f do_test >/dev/null && do_test
+}
+
+lfs_install()
+{
+    declare -f do_install >/dev/null && do_install
+}
+
+# 起動引数で指定したアクションを呼び出す
+do_action()
+{
+    DO_BUILD=0
+    DO_TEST=0
+    DO_INSTALL=0
+    DO_UNINSTALL=0
+    DO_CLEAN=0
+
+    # 起動引数に対応するアクションを選択する
+    if [ $# -eq 0 ]
+    then
+        # default action is "install"
+        DO_BUILD=1
+        DO_INSTALL=1
+    else
+        while [ $# -gt 0 ]
+        do
+            case $1 in
+            build)
+                DO_BUILD=1
+                ;;
+            test)
+                DO_BUILD=1
+                DO_TEST=1
+                ;;
+            install)
+                DO_BUILD=1
+                DO_INSTALL=1
+                ;;
+            clean)
+                DO_CLEAN=1
+                ;;
+            *)
+                echo "usage: $0 [build | test | install | clean]"
+	        exit 1
+            esac
+            shift
+        done
+    fi
+
+    # 選択したアクションを呼び出す
+    [ $DO_CLEAN     -ne 0 ] && (lfs_clean     || exit 128)
+    [ $DO_BUILD     -ne 0 ] && (lfs_build     || exit 128)
+    [ $DO_TEST      -ne 0 ] && (lfs_test      || exit 128)
+    [ $DO_INSTALL   -ne 0 ] && (lfs_install   || exit 128)
+    :
+}
+

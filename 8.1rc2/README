@@ -1,0 +1,148 @@
+
+    Linux From Scratch 8.1rc2 (x86_64) 生成手順
+                                                                          作成: 2017-08-23
+                                                                          更新: 2017-08-24
+
+ 1. ホストシステムにrootユーザでログインする。
+   検証環境: Kali GNU/Linux 2017.1 Rolling
+
+   $ su -
+
+ 2. 作業ディレクトリに移動する。
+   # cd /usr/src/LFS/8.1rc2/scripts
+
+ 3. 設定をカスタマイズする。
+   # vi buildenv
+
+   LFS=/mnt/lfs        # マウントポイント
+   ROOTDEV=/dev/sda8   # パーティション
+   SWAPDEV=/dev/sda5   # スワップデバイス
+
+ 4. ホストシステムを設定する。
+
+   # . buildenv
+   # ./001_version-check.sh
+   # ./002_usergroup.sh
+
+ 5. ターゲットファイルシステムを初期化する。
+
+   # ./003_mkfs.sh
+   # ./004_mount.sh
+   # ./005_initfs.sh
+   # ./006_copysources.sh
+   # ./007_copyscripts.sh
+   # ./008_su-lfs.sh
+
+ 6. ビルドツールを生成・インストールする。
+
+   $ cd /mnt/lfs/scripts
+   $ ./stage1.sh     # 100_binutils_pass1.sh 〜 150_stripping.sh を実行
+   $ ./151_logout.sh
+   # ./stage2.sh     # 200_ownership.sh 〜 208_varlog.sh を実行
+
+ 7. 正版モジュールを生成・インストールする。
+
+   # ./250_chroot.sh
+   # cd /scripts
+   # ./stage3.sh     # 300_linuxapi.sh 〜 402_rootpass.sh を実行
+   # ./403_logout.sh
+   # ./stage4.sh     # 420_chroot.sh 〜 462_release.sh を実行
+
+ 8. ターゲットシステムをブート可能にする。
+
+   # ./500_copykernel.sh
+   # ./501_umount-lfs.sh
+   # ./502_backup-lfs.sh
+   # ./503_umount.sh
+   # ./504_updategrub.sh
+
+ 9. ホストシステムを再起動する。
+   # shutdown -r 0
+
+
+
+ 付録1. ホストシステムのS/Wバージョン一覧
+   # ./001_version-check.sh
+
+   bash, version 4.4.12(1)-release
+   /bin/sh -> /bin/dash
+   ERROR: /bin/sh does not point to bash
+   Binutils: (GNU Binutils for Debian) 2.28
+   bison (GNU Bison) 3.0.4
+   /usr/bin/yacc -> /usr/bin/bison.yacc
+   bzip2,  Version 1.0.6, 6-Sept-2010.
+   Coreutils:  8.26
+   diff (GNU diffutils) 3.6
+   find (GNU findutils) 4.7.0-git
+   GNU Awk 4.1.4, API: 1.1 (GNU MPFR 3.1.5, GNU MP 6.1.2)
+   /usr/bin/awk -> /usr/bin/gawk
+   gcc (Debian 6.4.0-1) 6.4.0 20170704
+   g++ (Debian 6.4.0-1) 6.4.0 20170704
+   (Debian GLIBC 2.24-12) 2.24
+   grep (GNU grep) 3.1
+   gzip 1.6
+   Linux version 4.11.0-kali1-amd64 (devel@kali.org) \
+   (gcc version 6.4.0 20170704 (Debian 6.4.0-1) ) #1 SMP Debian 4.11.6-1kali1 (2017-06-21)
+   m4 (GNU M4) 1.4.18
+   GNU Make 4.1
+   GNU patch 2.7.5
+   Perl version='5.26.0';
+   sed (GNU sed) 4.4
+   tar (GNU tar) 1.29
+   texi2any (GNU texinfo) 6.4.90
+   xz (XZ Utils) 5.2.2
+   g++ compilation OK
+
+ 付録2. スクリプト一覧
+
+   root@KALI:/usr/src/LFS/8.1rc2/scripts# ls
+
+   001_version-check.sh   133_util-linux.sh   334_flex.sh         401_savelib.sh
+   002_usergroup.sh       134_xz.sh           335_grep.sh         402_rootpass.sh
+   003_mkfs.sh            150_stripping.sh    337_bash.sh         403_logout.sh
+   004_mount.sh           151_logout.sh       338_execbash.sh     420_chroot.sh
+   005_mkdir.sh           200_ownership.sh    340_libtool.sh      421_stripping.sh
+   006_copysources.sh     201_kernelfs.sh     341_gdbm.sh         422_logout.sh
+   007_copyscripts.sh     202_mount-lfs.sh    342_gperf.sh        423_chroot.sh
+   008_su-lfs.sh          203_chroot.sh       343_expat.sh        424_cleanup.sh
+   100_binutils_pass1.sh  204_directories.sh  344_inetutils.sh    425_zaptools.sh
+   101_gcc_pass1.sh       205_essential.sh    345_perl.sh         451_networking.sh
+   102_linuxapi.sh        206_execbash.sh     346_xmlparser.sh    452_sysvinit.sh
+   103_glibc.sh           207_fixlink.sh      347_intltool.sh     453_config.sh
+   104_glibc-test.sh      208_varlog.sh       348_autoconf.sh     454_rc.sh
+   105_libstdc++.sh       209_logout.sh       349_automake.sh     460_kernel.sh
+   106_binutils_pass2.sh  250_chroot.sh       350_xz.sh           461_kernel-install.sh
+   107_binutils_ldnew.sh  300_linuxapi.sh     351_kmod.sh         462_release.sh
+   108_gcc_pass2.sh       301_man-pages.sh    352_gettext.sh      500_copykernel.sh
+   109_cc-test.sh         302_glibc.sh        353_procps-ng.sh    501_umount-lfs.sh
+   110_tcl-core.sh        303_toolchain.sh    354_e2fsprogs.sh    502_backup-lfs.sh
+   111_expect.sh          310_zlib.sh         355_coreutils.sh    503_umount.sh
+   112_dejagnu.sh         311_file.sh         356_diffutils.sh    504_updategrub.sh
+   113_check.sh           312_readline.sh     357_gawk.sh         README
+   114_ncurses.sh         313_m4.sh           358_findutils.sh    backup-lfs.sh
+   115_bash.sh            314_bc.sh           359_groff.sh        bash_profile
+   116_bison.sh           315_binutils.sh     360_grub2.sh        bashrc
+   117_bzip2.sh           316_gmp.sh          361_less.sh         buildenv
+   118_coreutils.sh       317_mpfr.sh         362_gzip.sh         buildlfs
+   119_diffutils.sh       318_mpc.sh          363_iproute2.sh     buildtools
+   120_file.sh            319_gcc.sh          364_kbd.sh          copyscripts.sh
+   121_findutils.sh       320_gcc-test.sh     365_libpipeline.sh  copysources.sh
+   122_gawk.sh            321_bzip2.sh        366_make.sh         dispatch.sh
+   123_gettext.sh         322_pkg-config.sh   367_patch.sh        mount-lfs.sh
+   124_grep.sh            323_ncurses.sh      368_sysklogd.sh     mount.sh
+   125_gzip.sh            324_attr.sh         369_sysvinit.sh     stage1.sh
+   126_m4.sh              325_acl.sh          370_eudev.sh        stage2.sh
+   127_make.sh            326_libcap.sh       371_util-linux.sh   stage3.sh
+   128_patch.sh           327_sed.sh          372_man-db.sh       stage4.sh
+   129_perl.sh            328_shadow.sh       373_tar.sh          umount-lfs.sh
+   130_sed.sh             330_psmisc.sh       374_texinfo.sh      umount.sh
+   131_tar.sh             331_iana-etc.sh     375_vim.sh
+   132_texinfo.sh         333_bison.sh        400_bootscripts.sh
+
+ 付録3. Dockerイメージ生成手順
+
+   # cat lfs-snapshot-8.1rc2.tar.gz|docker import - lfs/8.1rc2:latest
+   # docker images
+
+                                                                                      以上
+
