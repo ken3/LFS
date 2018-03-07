@@ -8,17 +8,16 @@
 
    $ su -
 
- 2. パッケージソース一式をダウンロードして /usr/src/LFS/8.2/packages/ に配置する。
-   # mkdir -p /usr/src/LFS/8.2/packages
-   # cd /usr/src/LFS/8.2/packages
-   # wget -i /tmp/wget-list
+ 2. 作業ディレクトリ /usr/src に GitHubリポジトリを複製する。
+   # cd /usr/src
+   # git clone https://github.com/ken3/LFS.git
 
- 3. 作業ディレクトリ /usr/src/LFS/8.2/scripts/ にスクリプト一式を配置する。
-   # mkdir -p /usr/src/LFS/8.2/scripts
-   # cd /usr/src/LFS/8.2/scripts
-   # tar xvf /tmp/scripts.tar.gz
+ 3. パッケージソース一式をダウンロードする。
+   # cd /usr/src/LFS/8.2/packages
+   # wget -i wget-list
 
  4. 設定をカスタマイズする。
+   # cd /usr/src/LFS/8.2/scripts
    # vi buildenv
 
    LFS=/mnt/lfs        # マウントポイント
