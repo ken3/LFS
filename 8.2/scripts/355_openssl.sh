@@ -21,6 +21,7 @@ ARCHIVE=`tarballpath $SOURCEROOT`
 # 実行可能条件をチェックする                                          #
 #######################################################################
 lfs_selfcheck || exit 2
+[ -x /usr/bin/perl ] || exit 2 # config requires perl.
 
 #######################################################################
 # ソース展開/パッチ適用/configure/Makefile生成                        #

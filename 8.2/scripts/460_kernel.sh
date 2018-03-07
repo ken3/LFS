@@ -34,9 +34,8 @@ do_setup()
     [ "$SOURCEROOT" == "$BUILDROOT" ] || mv $SOURCEROOT $BUILDROOT
     cd $BUILDDIR || exit 1
 
-    #cp -p ${SOURCEDIR}/config-4.9.9-lfs-amd64 .config
-    cp -p ${SOURCEDIR}/config-4.11.0-kali1-amd64 .config
-    make oldconfig
+    cp -p ${SOURCEDIR}/config-4.14.0-kali3-amd64 .config
+    make oldconfig # interacive
 }
 
 #######################################################################
@@ -65,12 +64,6 @@ do_test()
 do_install()
 {
     cd $BUILDDIR || exit 1
-    #make modules_install
-    #cp -v arch/x86/boot/bzImage /boot/vmlinuz-$KVERSION
-    #cp -v System.map /boot/System.map-$KVERSION
-    #cp -v .config /boot/config-$KVERSION
-    #install -d /usr/share/doc/linux-$KVERSION
-    #cp -r Documentation/* /usr/share/doc/linux-$KVERSION
     :
 }
 
