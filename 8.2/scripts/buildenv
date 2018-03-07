@@ -1,0 +1,16 @@
+
+LFS=/mnt/lfs
+export LFS
+
+ROOTDEV=/dev/sda8
+export ROOTDEV
+
+SWAPDEV=/dev/sda5
+export SWAPDEV
+
+SOURCEDIR=$LFS/sources
+export SOURCEDIR
+
+BUILDTOP=$LFS/build_tools
+export BUILDTOP
+

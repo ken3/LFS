@@ -1,0 +1,158 @@
+
+    Linux From Scratch 8.2 (x86_64) 生成手順
+                                                                          作成: 2018-03-05
+                                                                          更新: 2018-03-07
+
+ 1. ホストシステムにrootユーザでログインする。
+   検証環境: Kali GNU/Linux 2017.1 Rolling
+
+   $ su -
+
+ 2. パッケージソース一式をダウンロードして /usr/src/LFS/8.2/packages/ に配置する。
+   # mkdir -p /usr/src/LFS/8.2/packages
+   # cd /usr/src/LFS/8.2/packages
+   # wget -i /tmp/wget-list
+
+ 3. 作業ディレクトリ /usr/src/LFS/8.2/scripts/ にスクリプト一式を配置する。
+   # mkdir -p /usr/src/LFS/8.2/scripts
+   # cd /usr/src/LFS/8.2/scripts
+   # tar xvf /tmp/scripts.tar.gz
+
+ 4. 設定をカスタマイズする。
+   # vi buildenv
+
+   LFS=/mnt/lfs        # マウントポイント
+   ROOTDEV=/dev/sda8   # パーティション
+   SWAPDEV=/dev/sda5   # スワップデバイス
+
+ 5. ホストシステムを設定する。
+
+   # . buildenv
+   # ./001_version-check.sh
+   # ./002_usergroup.sh
+
+ 6. ターゲットファイルシステムを初期化する。
+
+   # ./003_mkfs.sh
+   # ./004_mount.sh
+   # ./005_mkdir.sh
+   # ./006_copysources.sh
+   # ./007_copyscripts.sh
+   # ./008_su-lfs.sh
+
+ 7. ビルドツールを生成・インストールする。
+
+   $ cd /mnt/lfs/scripts
+   $ ./stage1.sh     # 100_binutils_pass1.sh 〜 150_stripping.sh を実行
+   $ ./151_logout.sh
+   $ exit
+   # ./stage2.sh     # 200_ownership.sh 〜 208_varlog.sh を実行
+
+ 8. 正版モジュールを生成・インストールする。
+
+   # ./250_chroot.sh
+   # cd /scripts
+   # ./stage3.sh     # 300_linuxapi.sh 〜 402_rootpass.sh を実行
+   # ./403_logout.sh
+   # exit
+   # ./stage4.sh     # 420_chroot.sh 〜 462_release.sh を実行
+
+ 9. ターゲットシステムをブート可能にする。
+
+   # ./500_copykernel.sh
+   # ./501_umount-lfs.sh
+   # ./502_backup-lfs.sh
+   # ./503_umount.sh
+   # ./504_updategrub.sh
+
+10. ホストシステムを再起動する。
+   # shutdown -r 0
+
+
+
+ 付録1. ホストシステムのS/Wバージョン一覧
+   # ./001_version-check.sh
+
+   bash, version 4.4.12(1)-release
+   /bin/sh -> /bin/dash
+   ERROR: /bin/sh does not point to bash
+   Binutils: (GNU Binutils for Debian) 2.28
+   bison (GNU Bison) 3.0.4
+   /usr/bin/yacc -> /usr/bin/bison.yacc
+   bzip2,  Version 1.0.6, 6-Sept-2010.
+   Coreutils:  8.26
+   diff (GNU diffutils) 3.6
+   find (GNU findutils) 4.7.0-git
+   GNU Awk 4.1.4, API: 1.1 (GNU MPFR 3.1.5, GNU MP 6.1.2)
+   /usr/bin/awk -> /usr/bin/gawk
+   gcc (Debian 6.4.0-1) 6.4.0 20170704
+   g++ (Debian 6.4.0-1) 6.4.0 20170704
+   (Debian GLIBC 2.24-12) 2.24
+   grep (GNU grep) 3.1
+   gzip 1.6
+   Linux version 4.11.0-kali1-amd64 (devel@kali.org) \
+   (gcc version 6.4.0 20170704 (Debian 6.4.0-1) ) #1 SMP Debian 4.11.6-1kali1 (2017-06-21)
+   m4 (GNU M4) 1.4.18
+   GNU Make 4.1
+   GNU patch 2.7.5
+   Perl version='5.26.0';
+   sed (GNU sed) 4.4
+   tar (GNU tar) 1.29
+   texi2any (GNU texinfo) 6.4.90
+   xz (XZ Utils) 5.2.2
+   g++ compilation OK
+
+ 付録2. スクリプト一覧
+
+   root@KALI:/usr/src/LFS/8.2/scripts# ls
+
+001_version-check.sh   150_stripping.sh    337_execbash.sh     384_texinfo.sh
+002_usergroup.sh       151_logout.sh       340_libtool.sh      385_vim.sh
+003_mkfs.sh            200_ownership.sh    341_gdbm.sh         400_bootscripts.sh
+004_mount.sh           201_kernelfs.sh     342_gperf.sh        401_savelib.sh
+005_mkdir.sh           202_mount-lfs.sh    343_expat.sh        402_rootpass.sh
+006_copysources.sh     203_chroot.sh       344_inetutils.sh    403_logout.sh
+007_copyscripts.sh     204_directories.sh  345_perl.sh         420_chroot.sh
+008_su-lfs.sh          205_essential.sh    346_xmlparser.sh    421_stripping.sh
+100_binutils_pass1.sh  206_execbash.sh     347_intltool.sh     422_logout.sh
+101_gcc_pass1.sh       207_fixlink.sh      348_autoconf.sh     423_chroot.sh
+102_linuxapi.sh        208_varlog.sh       349_automake.sh     424_cleanup.sh
+103_glibc.sh           209_logout.sh       350_xz.sh           425_zaptools.sh
+104_glibc-test.sh      250_chroot.sh       351_kmod.sh         451_networking.sh
+105_libstdc++.sh       300_linuxapi.sh     352_gettext.sh      452_sysvinit.sh
+106_binutils_pass2.sh  301_man-pages.sh    353_libelf.sh       453_config.sh
+107_binutils_ldnew.sh  302_glibc.sh        354_libffi.sh       454_rc.sh
+108_gcc_pass2.sh       303_toolchain.sh    355_openssh.sh      460_kernel.sh
+109_cc-test.sh         310_zlib.sh         356_python3.sh      461_kernel-install.sh
+110_tcl-core.sh        311_file.sh         357_ninja.sh        462_release.sh
+111_expect.sh          312_readline.sh     358_meson.sh        500_copykernel.sh
+112_dejagnu.sh         313_m4.sh           360_procps-ng.sh    501_umount-lfs.sh
+113_m4.sh              314_bc.sh           361_e2fsprogs.sh    502_backup-lfs.sh
+114_ncurses.sh         315_binutils.sh     362_coreutils.sh    503_umount.sh
+115_bash.sh            316_gmp.sh          363_check.sh        504_updategrub.sh
+116_bison.sh           317_mpfr.sh         364_diffutils.sh    backup-lfs.sh
+117_bzip2.sh           318_mpc.sh          365_gawk.sh         bash_profile
+118_coreutils.sh       319_gcc.sh          366_findutils.sh    bashrc
+119_diffutils.sh       320_gcc-test.sh     367_groff.sh        buildenv
+120_file.sh            321_bzip2.sh        370_grub2.sh        buildlfs
+121_findutils.sh       322_pkg-config.sh   371_less.sh         buildtools
+122_gawk.sh            323_ncurses.sh      372_gzip.sh         copyscripts.sh
+123_gettext.sh         324_attr.sh         373_iproute2.sh     copysources.sh
+124_grep.sh            325_acl.sh          374_kbd.sh          dispatch.sh
+125_gzip.sh            326_libcap.sh       375_libpipeline.sh  mount-lfs.sh
+127_make.sh            327_sed.sh          376_make.sh         mount.sh
+128_patch.sh           328_shadow.sh       377_patch.sh        stage1.sh
+129_perl.sh            330_psmisc.sh       378_sysklogd.sh     stage2.sh
+130_sed.sh             331_iana-etc.sh     379_sysvinit.sh     stage3.sh
+131_tar.sh             333_bison.sh        380_eudev.sh        stage4.sh
+132_texinfo.sh         334_flex.sh         381_util-linux.sh   umount-lfs.sh
+133_util-linux.sh      335_grep.sh         382_man-db.sh       umount.sh
+134_xz.sh              336_bash.sh         383_tar.sh
+
+ 付録3. Dockerイメージ生成手順
+
+   # cat lfs-snapshot-8.2.tar.gz|docker import - lfs/8.2:latest
+   # docker images
+
+                                                                                      以上
+
