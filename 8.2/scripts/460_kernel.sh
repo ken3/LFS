@@ -34,7 +34,8 @@ do_setup()
     [ "$SOURCEROOT" == "$BUILDROOT" ] || mv $SOURCEROOT $BUILDROOT
     cd $BUILDDIR || exit 1
 
-    cp -p ${SOURCEDIR}/config-4.14.0-kali3-amd64 .config
+    #cp -p ${SOURCEDIR}/config-4.14.0-kali3-amd64 .config
+    cp -p ${SOURCEDIR}/config-4.15.3-lfs-8.2 .config
     make oldconfig # interacive
 }
 
