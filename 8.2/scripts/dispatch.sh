@@ -39,5 +39,6 @@ do
     fi
     shift
 done
+date|tee -a $STAGELOG
 exit 0
 
