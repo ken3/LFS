@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # [stage1]
-# LFSの 100_binutils_pass1.sh 〜 150_stripping.sh を順次実行する。
+# LFSの 100_binutils_pass1.sh 〜 190_stripping.sh を順次実行する。
 
 . buildtools
 [ `/usr/bin/whoami` == lfs ]    || exit 2
@@ -35,7 +35,7 @@ cd $LFS/scripts || exit 1
         110_tcl-core.sh       \
         111_expect.sh         \
         112_dejagnu.sh        \
-        113_m4.sh          \
+        113_m4.sh             \
         114_ncurses.sh        \
         115_bash.sh           \
         116_bison.sh          \
@@ -48,17 +48,18 @@ cd $LFS/scripts || exit 1
         123_gettext.sh        \
         124_grep.sh           \
         125_gzip.sh           \
-        127_make.sh           \
-        128_patch.sh          \
-        129_perl.sh           \
-        130_sed.sh            \
-        131_tar.sh            \
-        132_texinfo.sh        \
-        133_util-linux.sh     \
-        134_xz.sh             \
-        150_stripping.sh
+        126_make.sh           \
+        127_patch.sh          \
+        128_perl.sh           \
+        129_sed.sh            \
+        130_tar.sh            \
+        131_texinfo.sh        \
+        132_util-linux.sh     \
+        133_xz.sh             \
+        149_stripping.sh
 [ $? -eq 0 ] || exit 1
+cp -p /tmp/lfsbuild.log /tmp/stage1.log
 
 echo "Stage1 has beed done."
-echo "OK, proceed to 151_logout.sh"
+echo "OK, proceed to 150_logout.sh"
 

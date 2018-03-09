@@ -1,22 +1,22 @@
+#!/bin/bash
 
-# Linux From Scratch Version 8.2
-# Chapter 8. Making the LFS System Bootable
-# 8.3. Linux-4.15.3
+# Linux From Scratch - Version 8.2
+# Chapter 5. Constructing a Temporary System
+# 5.29. Perl-5.26.1
 
 #######################################################################
 # フレームワークを読み込む                                            #
 #######################################################################
-. buildlfs || exit 1
+. buildtools || exit 1
 
 #######################################################################
 # 対象ソースとビルドディレクトリを指定する                            #
 #######################################################################
-PKGVERSION=4.15.3
-SOURCEROOT=linux-${PKGVERSION}
-BUILDROOT=linux-kernel-${PKGVERSION}
+PKGVERSION=5.26.1
+SOURCEROOT=perl-${PKGVERSION}
+BUILDROOT=${SOURCEROOT}
 BUILDDIR=${BUILDTOP}/${BUILDROOT}
 ARCHIVE=`tarballpath $SOURCEROOT`
-KVERSION=${PKGVERSION}-lfs-8.2
 
 #######################################################################
 # 実行可能条件をチェックする                                          #
@@ -28,7 +28,17 @@ lfs_selfcheck || exit 2
 #######################################################################
 do_setup()
 {
-    :
+    cd $BUILDTOP
+    /bin/rm -rf $SOURCEROOT $BUILDROOT
+    tar xvf $ARCHIVE
+    [ "$SOURCEROOT" == "$BUILDROOT" ] || mv $SOURCEROOT $BUILDROOT
+    cd $BUILDDIR || exit 1
+
+#    sed -e '9751 a#ifndef PERL_IN_XSUB_RE' \
+#        -e '9808 a#endif'                  \
+#        -i regexec.c
+
+    sh Configure -des -Dprefix=/tools -Dlibs=-lm
 }
 
 #######################################################################
@@ -38,7 +48,7 @@ do_build()
 {
     [ -d $BUILDDIR ] || do_setup
     cd $BUILDDIR || exit 1
-    :
+    make
 }
 
 #######################################################################
@@ -56,12 +66,9 @@ do_test()
 do_install()
 {
     cd $BUILDDIR || exit 1
-    make modules_install
-    cp -v arch/x86/boot/bzImage /boot/vmlinuz-$KVERSION
-    cp -v System.map /boot/System.map-$KVERSION
-    cp -v .config /boot/config-$KVERSION
-    install -d /usr/share/doc/linux-$KVERSION
-    cp -r Documentation/* /usr/share/doc/linux-$KVERSION
+    cp -v perl cpan/podlators/scripts/pod2man /tools/bin
+    mkdir -pv /tools/lib/perl5/$PKGVERSION
+    cp -Rv lib/* /tools/lib/perl5/$PKGVERSION
 }
 
 #######################################################################

@@ -10,8 +10,8 @@
 # ホストシステムのカーネルをLFS側に流用コピーする
 KVERSION=4.14.0-kali3-amd64
 
-rm -f $LFS/boot/*
-rm -rf $LFS/lib/modules/*
+#rm -f $LFS/boot/*
+#rm -rf $LFS/lib/modules/*
 
 cp -p  /boot/vmlinuz-$KVERSION    $LFS/boot/
 cp -p  /boot/initrd.img-$KVERSION $LFS/boot/

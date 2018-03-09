@@ -1,0 +1,122 @@
+Panasonic CF-F9
+CPU: Intel(R) Core(TM) i5 CPU M520@2.40GHz x4T
+RAM: 6.0GB
+
+[stage1]
+    100_binutils_pass1.sh       115sec (  1'55")  510028    binutils-2.30_pass1
+    101_gcc_pass1.sh            945sec ( 15'45")  1943248   gcc-7.3.0_pass1
+    102_linuxapi.sh              30sec (  0'30")  933484    linux-api-4.15.3
+    103_glibc.sh                545sec (  9' 5")  712536    glibc-2.27
+    104_glibc-test.sh             0sec (  0' 0")
+    105_libstdc++.sh             86sec (  1'26")  744516    libstdc++-7.3.0
+    106_binutils_pass2.sh       114sec (  1'54")  473812    binutils-2.30_pass2
+    107_binutils_ldnew.sh       126sec (  2' 6")  473828    binutils-2.30_ldnew
+    108_gcc_pass2.sh           1292sec ( 21'32")  2035312   gcc-7.3.0_pass2
+    109_cc-test.sh                1sec (  0' 1")
+    110_tcl-core.sh             139sec (  2'19")  60148     tcl8.6.8
+    111_expect.sh                14sec (  0'14")  3620      expect5.45.4
+    112_dejagnu.sh                1sec (  0' 1")  2420      dejagnu-1.6.1
+    113_m4.sh                    40sec (  0'40")  18176     m4-1.4.18
+    114_ncurses.sh               92sec (  1'32")  30712     ncurses-6.1
+    115_bash.sh                  59sec (  0'59")  50292     bash-4.4.18
+    116_bison.sh                 60sec (  1' 0")  29460     bison-3.0.4
+    117_bzip2.sh                  3sec (  0' 3")  4124      bzip2-1.0.6
+    118_coreutils.sh            115sec (  1'55")  105044    coreutils-8.29
+    119_diffutils.sh             51sec (  0'51")  20484     diffutils-3.6
+    120_file.sh                  16sec (  0'16")  11356     file-5.32
+    121_findutils.sh             77sec (  1'17")  32100     findutils-4.6.0
+    122_gawk.sh                  37sec (  0'37")  35572     gawk-4.2.0
+    123_gettext.sh              141sec (  2'21")  152964    gettext-0.19.8.1
+    124_grep.sh                  43sec (  0'43")  18364     grep-3.1
+    125_gzip.sh                  26sec (  0'26")  9336      gzip-1.9
+    126_make.sh                  16sec (  0'16")  10628     make-4.2.1
+    127_patch.sh                 45sec (  0'45")  11364     patch-2.7.6
+    128_perl.sh                 185sec (  3' 5")  199912    perl-5.26.1
+    129_sed.sh                   39sec (  0'39")  15176     sed-4.4
+    130_tar.sh                   67sec (  1' 7")  30060     tar-1.30
+    131_texinfo.sh               56sec (  0'56")  92596     texinfo-6.5
+    132_util-linux.sh           104sec (  1'44")  100456    util-linux-2.31.1
+    133_xz.sh                    32sec (  0'32")  14228     xz-5.2.3
+    TOTAL                      4712sec ( 78'32")  8885360   build_tools
+
+[stage3-1]
+    301_linuxapi.sh              25sec (  0'25")  933312    linux-api-4.15.3
+    302_man-pages.sh              2sec (  0' 2")  16348     man-pages-4.15
+    303_glibc.sh                776sec ( 12'56")  714788    glibc-2.27
+    304_toolchain.sh              0sec (  0' 0")
+    305_zlib.sh                   5sec (  0' 5")  4932      zlib-1.2.11
+    306_file.sh                  15sec (  0'15")  11312     file-5.32
+    307_readline.sh              12sec (  0'12")  9904      readline-7.0
+    308_m4.sh                    39sec (  0'39")  18112     m4-1.4.18
+    309_bc.sh                     7sec (  0' 7")  3268      bc-1.07.1
+    310_binutils.sh             399sec (  6'39")  867092    binutils-2.30
+    311_gmp.sh                   74sec (  1'14")  29500     gmp-6.1.2
+    312_mpfr.sh                  57sec (  0'57")  18608     mpfr-4.0.1
+    313_mpc.sh                   13sec (  0'13")  7232      mpc-1.1.0
+    314_gcc.sh                 1186sec ( 19'46")  2336976   gcc-7.3.0
+    315_gcc-test.sh               1sec (  0' 1")
+    316_bzip2.sh                  6sec (  0' 6")  4436      bzip2-1.0.6
+    317_pkg-config.sh            53sec (  0'53")  26708     pkg-config-0.29.2
+    318_ncurses.sh               57sec (  0'57")  28048     ncurses-6.1
+    319_attr.sh                   7sec (  0' 7")  2892      attr-2.4.47
+    320_acl.sh                    9sec (  0' 9")  4180      acl-2.2.52
+    321_libcap.sh                 1sec (  0' 1")  1016      libcap-2.25
+    322_sed.sh                   44sec (  0'44")  15588     sed-4.4
+    323_shadow.sh                31sec (  0'31")  32976     shadow-4.5
+    324_psmisc.sh                10sec (  0'10")  3584      psmisc-23.1
+    325_iana-etc.sh               1sec (  0' 1")  1600      iana-etc-2.30
+    326_bison.sh                 61sec (  1' 1")  29252     bison-3.0.4
+    327_flex.sh                  19sec (  0'19")  12948     flex-2.6.4
+    328_grep.sh                  45sec (  0'45")  18344     grep-3.1
+    TOTAL                      2955sec ( 49'15")
+
+[stage3-2]
+    340_libtool.sh               13sec (  0'13")  10592     libtool-2.4.6
+    341_gdbm.sh                  14sec (  0'14")  7628      gdbm-1.14.1
+    342_gperf.sh                  6sec (  0' 6")  4828      gperf-3.1
+    343_expat.sh                 14sec (  0'14")  5848      expat-2.2.5
+    344_inetutils.sh             82sec (  1'22")  24436     inetutils-1.9.4
+    345_perl.sh                 253sec (  4'13")  190884    perl-5.26.1
+    346_xmlparser.sh              3sec (  0' 3")  1768      XML-Parser-2.44
+    347_intltool.sh               2sec (  0' 2")  1188      intltool-0.51.0
+    348_autoconf.sh               4sec (  0' 4")  8168      autoconf-2.69
+    349_automake.sh               4sec (  0' 4")  12596     automake-1.15.1
+    350_xz.sh                    26sec (  0'26")  12088     xz-5.2.3
+    351_kmod.sh                  14sec (  0'14")  11052     kmod-25
+    352_gettext.sh              263sec (  4'23")  154092    gettext-0.19.8.1
+    353_libelf.sh                68sec (  1' 8")  72572     elfutils-0.170
+    354_libffi.sh                10sec (  0'10")  6588      libffi-3.2.1
+    355_openssl.sh              151sec (  2'31")  58204     openssl-1.1.0g
+    356_python3.sh              168sec (  2'48")  160600    Python-3.6.4
+    357_python3-doc.sh            6sec (  0' 6")  43716     python-3.6.4-docs-html
+    358_ninja.sh                 37sec (  0'37")  16004     ninja-1.8.2
+    359_meson.sh                  3sec (  0' 3")  13788     meson-0.44.0
+    360_procps-ng.sh             21sec (  0'21")  11612     procps-ng-3.3.12
+    361_e2fsprogs.sh             42sec (  0'42")  44328     e2fsprogs-1.43.9
+    362_coreutils.sh            127sec (  2' 7")  106944    coreutils-8.29
+    363_check.sh                 20sec (  0'20")  10432     check-0.12.0
+    364_diffutils.sh             55sec (  0'55")  20468     diffutils-3.6
+    365_gawk.sh                  39sec (  0'39")  36004     gawk-4.2.0
+    366_findutils.sh             81sec (  1'21")  32032     findutils-4.6.0
+    367_groff.sh                 99sec (  1'39")  55008     groff-1.22.3
+    370_grub2.sh                112sec (  1'52")  115228    grub-2.02
+    371_less.sh                  10sec (  0'10")  3092      less-530
+    372_gzip.sh                  28sec (  0'28")  9300      gzip-1.9
+    373_iproute2.sh              19sec (  0'19")  9652      iproute2-4.15.0
+    374_kbd.sh                   20sec (  0'20")  23520     kbd-2.0.4
+    375_libpipeline.sh           32sec (  0'32")  6916      libpipeline-1.5.0
+    376_make.sh                  17sec (  0'17")  10620     make-4.2.1
+    377_patch.sh                 47sec (  0'47")  11304     patch-2.7.6
+    378_sysklogd.sh               2sec (  0' 2")  544       sysklogd-1.5.1
+    379_sysvinit.sh               1sec (  0' 1")  1148      sysvinit-2.88dsf
+    380_eudev.sh                 30sec (  0'30")  24392     eudev-3.2.5
+    381_util-linux.sh            90sec (  1'30")  87516     util-linux-2.31.1
+    382_man-db.sh                73sec (  1'13")  26948     man-db-2.8.1
+    383_tar.sh                   79sec (  1'19")  33212     tar-1.30
+    384_texinfo.sh               72sec (  1'12")  96528     texinfo-6.5
+    385_vim.sh                   35sec (  0'35")  73688     vim80
+    390_kernel.sh              6230sec (103'50")  13592344  linux-kernel-4.15.3
+    391_kernel-install.sh       148sec (  2'28")
+    400_bootscripts.sh            1sec (  0' 1")  240       lfs-bootscripts-20170626
+    TOTAL                      8671sec (144'31")
+

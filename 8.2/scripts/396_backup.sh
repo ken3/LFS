@@ -8,7 +8,9 @@ BASEDIR=`pwd`
 [ `whoami` == root ] || exit 2
 [ $LFS != ""       ] || exit 2
 
-cd $LFS && tar zcvf ${BASEDIR}/../lfs-snapshot.tar.gz \
+cp -p $LFS/tmp/stage3-*.log ${BASEDIR}/../
+
+cd $LFS && tar zcvf ${BASEDIR}/../lfs-stage3.tar.gz \
     bin      \
     boot     \
     dev      \

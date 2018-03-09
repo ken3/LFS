@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # [stage4]
-# LFSの 420_chroot.sh 〜 462_release.sh を順次実行する。
+# LFSの 400_chroot.sh 〜 457_release.sh を順次実行する。
 
 . buildenv
 [ `whoami` == root ] || exit 2
@@ -22,22 +22,21 @@ esac
 # stage4を実行する
 cd $LFS/scripts || exit 1
 
-./420_chroot.sh /scripts/dispatch.sh    \
-                421_stripping.sh
+./400_chroot.sh /scripts/dispatch.sh    \
+                401_stripping.sh
 [ $? -eq 0 ] || exit 1
 
-./423_chroot.sh /scripts/dispatch.sh    \
-                424_cleanup.sh          \
-                425_zaptools.sh         \
-                451_networking.sh       \
-                452_sysvinit.sh         \
-                453_config.sh           \
-                454_rc.sh               \
-                __460_kernel.sh         \
-                __461_kernel-install.sh \
-                462_release.sh
+./450_chroot.sh /scripts/dispatch.sh    \
+                451_cleanup.sh          \
+                452_zaptools.sh         \
+                453_networking.sh       \
+                454_sysvinit.sh         \
+                455_config.sh           \
+                456_rc.sh               \
+                457_release.sh
 [ $? -eq 0 ] || exit 1
+cp -p /tmp/lfsbuild.log /tmp/stage4.log
 
 echo "Stage4 has beed done."
-echo "OK, proceed to 500_copykernel.sh"
+echo "OK, proceed to 490_backup.sh"
 
