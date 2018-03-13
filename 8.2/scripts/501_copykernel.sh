@@ -19,3 +19,5 @@ cp -p  /boot/vmlinuz-${KVERSION}    \
        /boot/System.map-${KVERSION} $LFS/boot/
 cp -pr /lib/modules/${KVERSION}     $LFS/lib/modules/$KVERSION
 
+(cd /lib && tar cf - firmware)|(cd $LFS/lib && tar xf -)
+
