@@ -37,7 +37,8 @@ RAM: 6.0GB
     131_texinfo.sh               56sec (  0'56")  92596     texinfo-6.5
     132_util-linux.sh           104sec (  1'44")  100456    util-linux-2.31.1
     133_xz.sh                    32sec (  0'32")  14228     xz-5.2.3
-    TOTAL                      4712sec ( 78'32")  8885360   /build_tools
+    149_stripping.sh             10sec (  0'10")
+    TOTAL                      4722sec ( 78'42")  8885360   /build_tools
 
 [stage3-1]
     301_linuxapi.sh              25sec (  0'25")  933312    linux-api-4.15.3
@@ -119,5 +120,6 @@ RAM: 6.0GB
     390_kernel.sh              6230sec (103'50")  13592344  linux-kernel-4.15.3
     391_kernel-install.sh       148sec (  2'28")
     392_bootscripts.sh            1sec (  0' 1")  240       lfs-bootscripts-20170626
-    TOTAL                      8671sec (144'31")  20458940  /build
+    393_savelib.sh               10sec (  0'10")
+    TOTAL                      8681sec (144'41")  20458940  /build
 

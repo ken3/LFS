@@ -19,3 +19,6 @@ DISTRIB_CODENAME="LFS_${LFSVERSION}_2018-03-03"
 DISTRIB_DESCRIPTION="Linux From Scratch"
 EOF
 
+# UEFI needs /etc/os-release file
+cp -p /etc/lsb-release /etc/os-release
+

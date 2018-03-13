@@ -13,9 +13,9 @@ KVERSION=4.14.0-kali3-amd64
 #rm -f $LFS/boot/*
 #rm -rf $LFS/lib/modules/*
 
-cp -p  /boot/vmlinuz-$KVERSION    $LFS/boot/
-cp -p  /boot/initrd.img-$KVERSION $LFS/boot/
-cp -p  /boot/config-$KVERSION     $LFS/boot/
-cp -p  /boot/System.map-$KVERSION $LFS/boot/
-cp -pr /lib/modules/$KVERSION     $LFS/lib/modules/$KVERSION
+cp -p  /boot/vmlinuz-${KVERSION}    \
+       /boot/initr*-${KVERSION}*    \
+       /boot/config-${KVERSION}     \
+       /boot/System.map-${KVERSION} $LFS/boot/
+cp -pr /lib/modules/${KVERSION}     $LFS/lib/modules/$KVERSION
 

@@ -16,6 +16,7 @@ KVERSION=${PKGVERSION}-lfs-8.2
 /bin/cp -a $LFS/lib/modules/$PKGVERSION /lib/modules/$PKGVERSION
 
 mkinitramfs -o $LFS/boot/initrd.img-$KVERSION $PKGVERSION
+#mkinitrd $LFS/boot/initrd-$KVERSION.img $PKGVERSION
 
 /bin/rm -rf /lib/modules/$PKGVERSION
 

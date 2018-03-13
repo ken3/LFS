@@ -1,10 +1,10 @@
 
     Linux From Scratch 8.2 (x86_64) 生成手順
                                                                           作成: 2018-03-05
-                                                                          更新: 2018-03-09
+                                                                          更新: 2018-03-13
 
  1. ホストシステムにrootユーザでログインする。
-   検証環境: Kali GNU/Linux 2017.1 Rolling
+   検証環境: Kali GNU/Linux 2017.1 Rolling; Fedora 27
 
    $ su -
 
@@ -56,6 +56,7 @@
    # ./stage3.sh     # 301_linuxapi.sh 〜 394_rootpass.sh を実行
    # ./395_logout.sh
    # exit
+   # cd /mnt/lfs/scripts
    # ./396_backup.sh
    # ./stage4.sh     # 400_chroot.sh 〜 457_release.sh を実行
    # ./490_backup.sh
@@ -75,88 +76,146 @@
 
 
  付録1. ホストシステムのS/Wバージョン一覧
-   # ./001_version-check.sh
 
-   /tmp /usr/src/LFS/8.2/scripts
-   bash, version 4.4.12(1)-release
-   /bin/sh -> /bin/bash
-   Binutils: (GNU Binutils for Debian) 2.29
-   bison (GNU Bison) 3.0.4
-   /usr/bin/yacc -> /usr/bin/bison.yacc
-   bzip2,  Version 1.0.6, 6-Sept-2010.
-   Coreutils:  8.26
-   diff (GNU diffutils) 3.6
-   find (GNU findutils) 4.7.0-git
-   GNU Awk 4.1.4, API: 1.1 (GNU MPFR 3.1.6, GNU MP 6.1.2)
-   /usr/bin/awk -> /usr/bin/gawk
-   gcc (Debian 7.2.0-4) 7.2.0
-   g++ (Debian 7.2.0-4) 7.2.0
-   (Debian GLIBC 2.24-17) 2.24
-   grep (GNU grep) 3.1
-   gzip 1.6
-   Linux version 4.14.0-kali3-amd64 (devel@kali.org) (gcc version 7.3.0 (Debian 7.3.0-3)) #1 SMP Debian 4.14.17-1kali1 (2018-02-16)
-   m4 (GNU M4) 1.4.18
-   GNU Make 4.1
-   GNU patch 2.7.5
-   Perl version='5.26.0';
-   sed (GNU sed) 4.4
-   tar (GNU tar) 1.29
-   texi2any (GNU texinfo) 6.5
-   xz (XZ Utils) 5.2.2
-   g++ compilation OK
+   [Kali GNU/Linux 2017.1 Rolling]
+    bash, version 4.4.12(1)-release
+    /bin/sh -> /bin/bash
+    Binutils: (GNU Binutils for Debian) 2.29
+    bison (GNU Bison) 3.0.4
+    /usr/bin/yacc -> /usr/bin/bison.yacc
+    bzip2,  Version 1.0.6, 6-Sept-2010.
+    Coreutils:  8.26
+    diff (GNU diffutils) 3.6
+    find (GNU findutils) 4.7.0-git
+    GNU Awk 4.1.4, API: 1.1 (GNU MPFR 3.1.6, GNU MP 6.1.2)
+    /usr/bin/awk -> /usr/bin/gawk
+    gcc (Debian 7.2.0-4) 7.2.0
+    g++ (Debian 7.2.0-4) 7.2.0
+    (Debian GLIBC 2.24-17) 2.24
+    grep (GNU grep) 3.1
+    gzip 1.6
+    Linux version 4.14.0-kali3-amd64 (devel@kali.org) (gcc version 7.3.0 (Debian 7.3.0-3)) #1 SMP Debian 4.14.17-1kali1 (2018-02-16)
+    m4 (GNU M4) 1.4.18
+    GNU Make 4.1
+    GNU patch 2.7.5
+    Perl version='5.26.0';
+    sed (GNU sed) 4.4
+    tar (GNU tar) 1.29
+    texi2any (GNU texinfo) 6.5
+    xz (XZ Utils) 5.2.2
+    g++ compilation OK
+
+   [Fedora 27]
+    bash, version 4.4.19(1)-release
+    /bin/sh -> /usr/bin/bash
+    Binutils: version 2.29-6.fc27
+    bison (GNU Bison) 3.0.4
+    yacc not found
+    bzip2,  Version 1.0.6, 6-Sept-2010.
+    Coreutils:  8.27
+    diff (GNU diffutils) 3.6
+    find (GNU findutils) 4.6.0
+    GNU Awk 4.1.4, API: 1.1 (GNU MPFR 3.1.6-p2, GNU MP 6.1.2)
+    /usr/bin/awk -> /usr/bin/gawk
+    gcc (GCC) 7.3.1 20180303 (Red Hat 7.3.1-5)
+    g++ (GCC) 7.3.1 20180303 (Red Hat 7.3.1-5)
+    (GNU libc) 2.26
+    grep (GNU grep) 3.1
+    gzip 1.8
+    Linux version 4.15.7-300.fc27.x86_64 (mockbuild@bkernel01.phx2.fedoraproject.org) (gcc version 7.3.1 20180130 (Red Hat 7.3.1-2) (GCC)) #1 SMP Wed Feb 28 17:53:39 UTC 2018
+    m4 (GNU M4) 1.4.18
+    GNU Make 4.2.1
+    GNU patch 2.7.6
+    Perl version='5.26.1';
+    sed (GNU sed) 4.4
+    tar (GNU tar) 1.29
+    texi2any (GNU texinfo) 6.4
+    xz (XZ Utils) 5.2.3
+    g++ compilation OK
 
  付録2. スクリプト一覧
 
    root@KALI:/usr/src/LFS/8.2/scripts# ls
 
-001_version-check.sh   150_logout.sh       343_gperf.sh        391_kernel-install.sh
-002_usergroup.sh       190_backup.sh       344_expat.sh        392_bootscripts.sh
-003_mkfs.sh            200_ownership.sh    345_inetutils.sh    393_savelib.sh
-004_mount.sh           201_kernelfs.sh     346_perl.sh         394_rootpass.sh
-005_mkdir.sh           202_mount-lfs.sh    347_xmlparser.sh    395_logout.sh
-006_copysources.sh     210_chroot.sh       348_intltool.sh     396_backup.sh
-007_copyscripts.sh     211_directories.sh  349_autoconf.sh     400_chroot.sh
-008_su-lfs.sh          212_essential.sh    350_automake.sh     401_stripping.sh
-100_binutils_pass1.sh  213_fixlink.sh      351_xz.sh           450_chroot.sh
-101_gcc_pass1.sh       214_varlog.sh       352_kmod.sh         451_cleanup.sh
-102_linuxapi.sh        300_chroot.sh       353_gettext.sh      452_zaptools.sh
-103_glibc.sh           301_linuxapi.sh     354_libelf.sh       453_networking.sh
-104_glibc-test.sh      302_man-pages.sh    355_libffi.sh       454_sysvinit.sh
-105_libstdc++.sh       303_glibc.sh        356_openssl.sh      455_config.sh
-106_binutils_pass2.sh  304_toolchain.sh    357_python3.sh      456_rc.sh
-107_binutils_ldnew.sh  305_zlib.sh         358_python3-doc.sh  457_release.sh
-108_gcc_pass2.sh       306_file.sh         359_ninja.sh        490_backup.sh
-109_cc-test.sh         307_readline.sh     360_meson.sh        500_mkinitrd.sh
-110_tcl-core.sh        308_m4.sh           361_procps-ng.sh    501_copykernel.sh
-111_expect.sh          309_bc.sh           362_e2fsprogs.sh    502_umount-lfs.sh
-112_dejagnu.sh         310_binutils.sh     363_coreutils.sh    503_backup-lfs.sh
-113_m4.sh              311_gmp.sh          364_check.sh        504_umount.sh
-114_ncurses.sh         312_mpfr.sh         365_diffutils.sh    505_updategrub.sh
-115_bash.sh            313_mpc.sh          366_gawk.sh         backup-lfs.sh
-116_bison.sh           314_gcc.sh          367_findutils.sh    bash_profile
-117_bzip2.sh           315_gcc-test.sh     368_groff.sh        bashrc
-118_coreutils.sh       316_bzip2.sh        369_grub2.sh        buildenv
-119_diffutils.sh       317_pkg-config.sh   370_less.sh         buildlfs
-120_file.sh            318_ncurses.sh      371_gzip.sh         buildtools
-121_findutils.sh       319_attr.sh         372_iproute2.sh     copyscripts.sh
-122_gawk.sh            320_acl.sh          373_kbd.sh          copysources.sh
-123_gettext.sh         321_libcap.sh       374_libpipeline.sh  dispatch.sh
-124_grep.sh            322_sed.sh          375_make.sh         mount-lfs.sh
-125_gzip.sh            323_shadow.sh       376_patch.sh        mount.sh
-126_make.sh            324_psmisc.sh       377_sysklogd.sh     stage1.sh
-127_patch.sh           325_iana-etc.sh     378_sysvinit.sh     stage2.sh
-128_perl.sh            326_bison.sh        379_eudev.sh        stage3.sh
-129_sed.sh             327_flex.sh         380_util-linux.sh   stage4.sh
-130_tar.sh             328_grep.sh         381_man-db.sh       umount-lfs.sh
-131_texinfo.sh         329_bash.sh         382_tar.sh          umount.sh
-132_util-linux.sh      340_execbash.sh     383_texinfo.sh
-133_xz.sh              341_libtool.sh      384_vim.sh
-149_stripping.sh       342_gdbm.sh         390_kernel.sh
+   001_version-check.sh   150_logout.sh       343_gperf.sh        391_kernel-install.sh
+   002_usergroup.sh       190_backup.sh       344_expat.sh        392_bootscripts.sh
+   003_mkfs.sh            200_ownership.sh    345_inetutils.sh    393_savelib.sh
+   004_mount.sh           201_kernelfs.sh     346_perl.sh         394_rootpass.sh
+   005_mkdir.sh           202_mount-lfs.sh    347_xmlparser.sh    395_logout.sh
+   006_copysources.sh     210_chroot.sh       348_intltool.sh     396_backup.sh
+   007_copyscripts.sh     211_directories.sh  349_autoconf.sh     400_chroot.sh
+   008_su-lfs.sh          212_essential.sh    350_automake.sh     401_stripping.sh
+   100_binutils_pass1.sh  213_fixlink.sh      351_xz.sh           450_chroot.sh
+   101_gcc_pass1.sh       214_varlog.sh       352_kmod.sh         451_cleanup.sh
+   102_linuxapi.sh        300_chroot.sh       353_gettext.sh      452_zaptools.sh
+   103_glibc.sh           301_linuxapi.sh     354_libelf.sh       453_networking.sh
+   104_glibc-test.sh      302_man-pages.sh    355_libffi.sh       454_sysvinit.sh
+   105_libstdc++.sh       303_glibc.sh        356_openssl.sh      455_config.sh
+   106_binutils_pass2.sh  304_toolchain.sh    357_python3.sh      456_rc.sh
+   107_binutils_ldnew.sh  305_zlib.sh         358_python3-doc.sh  457_release.sh
+   108_gcc_pass2.sh       306_file.sh         359_ninja.sh        490_backup.sh
+   109_cc-test.sh         307_readline.sh     360_meson.sh        500_mkinitrd.sh
+   110_tcl-core.sh        308_m4.sh           361_procps-ng.sh    501_copykernel.sh
+   111_expect.sh          309_bc.sh           362_e2fsprogs.sh    502_umount-lfs.sh
+   112_dejagnu.sh         310_binutils.sh     363_coreutils.sh    503_backup-lfs.sh
+   113_m4.sh              311_gmp.sh          364_check.sh        504_umount.sh
+   114_ncurses.sh         312_mpfr.sh         365_diffutils.sh    505_updategrub.sh
+   115_bash.sh            313_mpc.sh          366_gawk.sh         backup-lfs.sh
+   116_bison.sh           314_gcc.sh          367_findutils.sh    bash_profile
+   117_bzip2.sh           315_gcc-test.sh     368_groff.sh        bashrc
+   118_coreutils.sh       316_bzip2.sh        369_grub2.sh        buildenv
+   119_diffutils.sh       317_pkg-config.sh   370_less.sh         buildlfs
+   120_file.sh            318_ncurses.sh      371_gzip.sh         buildtools
+   121_findutils.sh       319_attr.sh         372_iproute2.sh     copyscripts.sh
+   122_gawk.sh            320_acl.sh          373_kbd.sh          copysources.sh
+   123_gettext.sh         321_libcap.sh       374_libpipeline.sh  dispatch.sh
+   124_grep.sh            322_sed.sh          375_make.sh         mount-lfs.sh
+   125_gzip.sh            323_shadow.sh       376_patch.sh        mount.sh
+   126_make.sh            324_psmisc.sh       377_sysklogd.sh     stage1.sh
+   127_patch.sh           325_iana-etc.sh     378_sysvinit.sh     stage2.sh
+   128_perl.sh            326_bison.sh        379_eudev.sh        stage3.sh
+   129_sed.sh             327_flex.sh         380_util-linux.sh   stage4.sh
+   130_tar.sh             328_grep.sh         381_man-db.sh       umount-lfs.sh
+   131_texinfo.sh         329_bash.sh         382_tar.sh          umount.sh
+   132_util-linux.sh      340_execbash.sh     383_texinfo.sh
+   133_xz.sh              341_libtool.sh      384_vim.sh
+   149_stripping.sh       342_gdbm.sh         390_kernel.sh
 
  付録3. Dockerイメージ生成手順
 
    # cat lfs-snapshot-8.2.tar.gz|docker import - lfs/8.2:latest
    # docker images
+
+ 付録4. 特記事項
+
+ 1. Fedora 27ホスト(UEFI機種)を使う場合の注意点
+    ・LFSに /etc/os-release ファイルが必要。
+    ・grub.cfgのキーワードに違いがある。
+          linuxefi ...
+          initrdefi ...
+
+ 2. Fedora 27ホスト(systemd採用)を使う場合の注意点
+    ・Fedora 27上で生成したinitrdでLFSを起動すると、キー入力が数回に1度しか入らない。
+      仮想コンソールをtty1以外に切り替えれば回避可能。原因はinitrd内にsystemdが含まれ
+      ていることか？Kali GNU/Linuxで生成したinitrdを使用してLFSを起動した場合にはこの
+      問題は発生しない。
+
+      [参考: initrdの展開手順]
+      # cpio -i <../initramfs-4.15.6-300.fc27.x86_64.img
+      196 blocks
+      # dd if=../initramfs-4.15.6-300.fc27.x86_64.img of=body.img.gz bs=512 skip=196
+      41114+1 レコード入力
+      41114+1 レコード出力
+      21050563 バイト (21 MB) コピーされました、 0.116814 秒、 180 MB/秒
+      # gzip -dc body.img.gz|cpio -i
+      85738 blocks
+      # rm body.img.gz
+
+ 3. ネットワークアドレス設定
+    eth0を前提としている。例えば enp1s0 である場合には以下のように変更する。
+    [/etc/sysconfig/ifconfig.eth0]
+    ・IFACE=eth0 -> IFACE=enp1s0 に変更する。
+    ・ファイル名を ifconfig.enp1s0 に変更する。
 
                                                                                       以上
 
