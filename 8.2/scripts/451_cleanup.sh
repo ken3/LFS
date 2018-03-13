@@ -14,5 +14,7 @@ rm -f /usr/lib/libfl.a
 rm -f /usr/lib/libfl_pic.a
 rm -f /usr/lib/libz.a
 
+find /usr/lib -name '*.la' -delete
+
 rm -rf /tmp/*
 
