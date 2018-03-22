@@ -137,49 +137,49 @@
 
    root@KALI:/usr/src/LFS/8.2/scripts# ls
 
-   001_version-check.sh   150_logout.sh       343_gperf.sh        391_kernel-install.sh
-   002_usergroup.sh       190_backup.sh       344_expat.sh        392_bootscripts.sh
-   003_mkfs.sh            200_ownership.sh    345_inetutils.sh    393_savelib.sh
-   004_mount.sh           201_kernelfs.sh     346_perl.sh         394_rootpass.sh
-   005_mkdir.sh           202_mount-lfs.sh    347_xmlparser.sh    395_logout.sh
-   006_copysources.sh     210_chroot.sh       348_intltool.sh     396_backup.sh
-   007_copyscripts.sh     211_directories.sh  349_autoconf.sh     400_chroot.sh
-   008_su-lfs.sh          212_essential.sh    350_automake.sh     401_stripping.sh
-   100_binutils_pass1.sh  213_fixlink.sh      351_xz.sh           450_chroot.sh
-   101_gcc_pass1.sh       214_varlog.sh       352_kmod.sh         451_cleanup.sh
-   102_linuxapi.sh        300_chroot.sh       353_gettext.sh      452_zaptools.sh
-   103_glibc.sh           301_linuxapi.sh     354_libelf.sh       453_networking.sh
-   104_glibc-test.sh      302_man-pages.sh    355_libffi.sh       454_sysvinit.sh
-   105_libstdc++.sh       303_glibc.sh        356_openssl.sh      455_config.sh
-   106_binutils_pass2.sh  304_toolchain.sh    357_python3.sh      456_rc.sh
-   107_binutils_ldnew.sh  305_zlib.sh         358_python3-doc.sh  457_release.sh
-   108_gcc_pass2.sh       306_file.sh         359_ninja.sh        490_backup.sh
-   109_cc-test.sh         307_readline.sh     360_meson.sh        500_mkinitrd.sh
-   110_tcl-core.sh        308_m4.sh           361_procps-ng.sh    501_copykernel.sh
-   111_expect.sh          309_bc.sh           362_e2fsprogs.sh    502_umount-lfs.sh
-   112_dejagnu.sh         310_binutils.sh     363_coreutils.sh    503_backup-lfs.sh
-   113_m4.sh              311_gmp.sh          364_check.sh        504_umount.sh
-   114_ncurses.sh         312_mpfr.sh         365_diffutils.sh    505_updategrub.sh
-   115_bash.sh            313_mpc.sh          366_gawk.sh         backup-lfs.sh
-   116_bison.sh           314_gcc.sh          367_findutils.sh    bash_profile
-   117_bzip2.sh           315_gcc-test.sh     368_groff.sh        bashrc
-   118_coreutils.sh       316_bzip2.sh        369_grub2.sh        buildenv
-   119_diffutils.sh       317_pkg-config.sh   370_less.sh         buildlfs
-   120_file.sh            318_ncurses.sh      371_gzip.sh         buildtools
-   121_findutils.sh       319_attr.sh         372_iproute2.sh     copyscripts.sh
-   122_gawk.sh            320_acl.sh          373_kbd.sh          copysources.sh
-   123_gettext.sh         321_libcap.sh       374_libpipeline.sh  dispatch.sh
-   124_grep.sh            322_sed.sh          375_make.sh         mount-lfs.sh
-   125_gzip.sh            323_shadow.sh       376_patch.sh        mount.sh
-   126_make.sh            324_psmisc.sh       377_sysklogd.sh     stage1.sh
-   127_patch.sh           325_iana-etc.sh     378_sysvinit.sh     stage2.sh
-   128_perl.sh            326_bison.sh        379_eudev.sh        stage3.sh
-   129_sed.sh             327_flex.sh         380_util-linux.sh   stage4.sh
-   130_tar.sh             328_grep.sh         381_man-db.sh       umount-lfs.sh
-   131_texinfo.sh         329_bash.sh         382_tar.sh          umount.sh
-   132_util-linux.sh      340_execbash.sh     383_texinfo.sh
-   133_xz.sh              341_libtool.sh      384_vim.sh
-   149_stripping.sh       342_gdbm.sh         390_kernel.sh
+   001_version-check.sh   150_logout.sh       343_gperf.sh        390_kernel.sh
+   002_usergroup.sh       190_backup.sh       344_expat.sh        391_kernel-install.sh
+   003_mkfs.sh            200_ownership.sh    345_inetutils.sh    392_bootscripts.sh
+   004_mount.sh           201_kernelfs.sh     346_perl.sh         393_savelib.sh
+   005_mkdir.sh           202_mount-lfs.sh    347_xmlparser.sh    394_rootpass.sh
+   006_copysources.sh     210_chroot.sh       348_intltool.sh     395_logout.sh
+   007_copyscripts.sh     211_directories.sh  349_autoconf.sh     396_backup.sh
+   008_su-lfs.sh          212_essential.sh    350_automake.sh     400_chroot.sh
+   100_binutils_pass1.sh  213_fixlink.sh      351_xz.sh           401_stripping.sh
+   101_gcc_pass1.sh       214_varlog.sh       352_kmod.sh         450_chroot.sh
+   102_linuxapi.sh        300_chroot.sh       353_gettext.sh      451_cleanup.sh
+   103_glibc.sh           301_linuxapi.sh     354_libelf.sh       452_zaptools.sh
+   104_glibc-test.sh      302_man-pages.sh    355_libffi.sh       453_networking.sh
+   105_libstdc++.sh       303_glibc.sh        356_openssl.sh      454_sysvinit.sh
+   106_binutils_pass2.sh  304_toolchain.sh    357_python3.sh      455_config.sh
+   107_binutils_ldnew.sh  305_zlib.sh         358_python3-doc.sh  456_rc.sh
+   108_gcc_pass2.sh       306_file.sh         359_ninja.sh        457_release.sh
+   109_cc-test.sh         307_readline.sh     360_meson.sh        490_backup.sh
+   110_tcl-core.sh        308_m4.sh           361_procps-ng.sh    500_mkinitrd.sh
+   111_expect.sh          309_bc.sh           362_e2fsprogs.sh    501_copykernel.sh
+   112_dejagnu.sh         310_binutils.sh     363_coreutils.sh    502_umount-lfs.sh
+   113_m4.sh              311_gmp.sh          364_check.sh        503_backup-lfs.sh
+   114_ncurses.sh         312_mpfr.sh         365_diffutils.sh    504_umount.sh
+   115_bash.sh            313_mpc.sh          366_gawk.sh         505_updategrub.sh
+   116_bison.sh           314_gcc.sh          367_findutils.sh    backup-lfs.sh
+   117_bzip2.sh           315_gcc-test.sh     368_groff.sh        bash_profile
+   118_coreutils.sh       316_bzip2.sh        369_grub2.sh        bashrc
+   119_diffutils.sh       317_pkg-config.sh   370_less.sh         buildenv
+   120_file.sh            318_ncurses.sh      371_gzip.sh         buildlfs
+   121_findutils.sh       319_attr.sh         372_iproute2.sh     buildtools
+   122_gawk.sh            320_acl.sh          373_kbd.sh          busybox.list
+   123_gettext.sh         321_libcap.sh       374_libpipeline.sh  copyscripts.sh
+   124_grep.sh            322_sed.sh          375_make.sh         copysources.sh
+   125_gzip.sh            323_shadow.sh       376_patch.sh        dispatch.sh
+   126_make.sh            324_psmisc.sh       377_sysklogd.sh     mount-lfs.sh
+   127_patch.sh           325_iana-etc.sh     378_sysvinit.sh     mount.sh
+   128_perl.sh            326_bison.sh        379_eudev.sh        stage1.sh
+   129_sed.sh             327_flex.sh         380_util-linux.sh   stage2.sh
+   130_tar.sh             328_grep.sh         381_man-db.sh       stage3.sh
+   131_texinfo.sh         329_bash.sh         382_tar.sh          stage4.sh
+   132_util-linux.sh      340_execbash.sh     383_texinfo.sh      umount-lfs.sh
+   133_xz.sh              341_libtool.sh      384_vim.sh          umount.sh
+   149_stripping.sh       342_gdbm.sh         389_busybox.sh
 
  付録3. Dockerイメージ生成手順
 
