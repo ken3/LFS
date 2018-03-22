@@ -99,6 +99,7 @@ cp -p /tmp/lfsbuild.log /tmp/stage3-1.log
         382_tar.sh         \
         383_texinfo.sh     \
         384_vim.sh         \
+        389_busybox.sh     \
         390_kernel.sh         \
         391_kernel-install.sh \
         392_bootscripts.sh    \

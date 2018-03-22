@@ -1,7 +1,7 @@
 
     Linux From Scratch 8.2 (x86_64) 生成手順
                                                                           作成: 2018-03-05
-                                                                          更新: 2018-03-13
+                                                                          更新: 2018-03-22
 
  1. ホストシステムにrootユーザでログインする。
    検証環境: Kali GNU/Linux 2017.1 Rolling; Fedora 27

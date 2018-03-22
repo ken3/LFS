@@ -84,3 +84,5 @@ http://www.linuxfromscratch.org/patches/lfs/8.2/glibc-2.27-fhs-1.patch
 http://www.linuxfromscratch.org/patches/lfs/8.2/kbd-2.0.4-backspace-1.patch
 http://www.linuxfromscratch.org/patches/lfs/8.2/ninja-1.8.2-add_NINJAJOBS_var-1.patch
 http://www.linuxfromscratch.org/patches/lfs/8.2/sysvinit-2.88dsf-consolidated-1.patch
+http://busybox.net/downloads/busybox-1.27.2.tar.bz2
+
